@@ -1,0 +1,232 @@
+.game {
+  display: flex;
+  max-width: 1200px;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--light-white);
+}
+.game-user {
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  color: var(--light-white);
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+.clk {
+  padding: 5px 10px;
+}
+.clk__active {
+  color: var(--success);
+}
+
+.name {
+  color: #bfbeba;
+  text-transform: lowercase;
+  font-weight: 500;
+}
+
+/*  */
+
+.clearfix-7da63 {
+  clear: both;
+}
+
+.board-b72b1 {
+  border: 2px solid var(--board-sq-dark);
+  box-sizing: content-box;
+}
+
+.square-55d63 {
+  float: left;
+  position: relative;
+
+  /* disable any native browser highlighting */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.board__section {
+  width: 100%;
+  max-width: calc(400px + 30px);
+}
+.board__container {
+  background-color: var(--board-sq-light);
+  padding: 15px;
+  width: 100%;
+  border-radius: 8px;
+}
+#board {
+  width: 100%;
+  width: 400px;
+  min-height: 300px;
+}
+#board img {
+  user-select: none;
+  pointer-events: none;
+  -webkit-touch-callout: none;
+}
+.white-1e1d7 {
+  background-color: var(--board-sq-light);
+  color: #b58863;
+}
+
+.black-3c85d {
+  background-color: var(--board-sq-dark);
+  color: #f0d9b5;
+}
+
+.highlight1-32417,
+.highlight2-9c5d2 {
+  box-shadow: inset 0 0 3px 3px rgb(255, 255, 157);
+}
+
+.notation-322f9 {
+  cursor: default;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  position: absolute;
+}
+
+.alpha-d2270 {
+  bottom: 1px;
+  right: 3px;
+}
+
+.numeric-fc462 {
+  top: 2px;
+  left: 2px;
+}
+/* moves display */
+.controls {
+  padding-top: 10px;
+  background-color: var(--dark);
+  width: 100%;
+  max-width: 400px;
+  /* min-height: 400px; */
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.moves {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  background-color: #21304f;
+  border-top: 1px solid rgba(186, 186, 186, 0.25);
+}
+
+.desc {
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.evaluation {
+  padding: 5px 10px 5px;
+  font-size: 13px;
+}
+.game-controls {
+  /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; */
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  background-color: #21304f;
+}
+
+.game-controls span {
+  padding: 5px 10px;
+  margin: 5px 2px;
+  cursor: pointer;
+}
+
+.game-controls span:hover {
+  background-color: var(--success);
+  color: #fff;
+}
+.cntl_btn svg .game-controls svg {
+  fill: var(--light-white);
+  cursor: pointer;
+}
+.py-1 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.move__made div:hover {
+  background-color: var(--active);
+}
+/* control for small devices */
+.menu {
+  display: none;
+  box-shadow: rgba(134, 134, 134, 0.16) 0px 1px 4px;
+  position: absolute;
+  background-color: var(--bg);
+  left: 0;
+
+  bottom: 0;
+}
+.menu__open{
+  display: block;
+}
+.menu span {
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.close {
+  font-size: 24px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0!important;
+}
+.m-0{
+  margin: 0;
+}
+@media (max-width: 620px) {
+  .game {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .controls {
+    background-color: var(--bg);
+    margin-left: 0;
+    width: 100%;
+    max-width: 430px;
+
+    justify-content: start;
+    padding-top: 0;
+    margin-bottom: 2rem;
+  }
+  .game-controls {
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    z-index: 999;
+    box-shadow: rgba(255, 255, 255, 0.16) 0px -1px 4px;
+  }
+
+  .moves {
+    max-height: 100px;
+    height: auto;
+    overflow-y: auto;
+  }
+  #board {
+    width: 100%;
+    max-width: 400px;
+  }
+}
