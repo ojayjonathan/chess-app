@@ -50,4 +50,7 @@
     .sidebar__open{
         display: block;
     }
+    .main{
+        padding-top: 3rem;
+    }
 }

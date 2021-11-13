@@ -2,7 +2,7 @@ import React from 'react'
 import './index.css'
 
 
-function UserProfile({ user, id }) {
+function UserProfile({ user }) {
 
     return (
         <div className="game-user">
@@ -10,7 +10,7 @@ function UserProfile({ user, id }) {
                 <div className="name">{user.username}</div>
             </div>
             <div>
-                <div className="clk" id={"time" + id}>0:00:00
+                <div className="clk" id={"time" + user.id}>0:00:00
                 </div>
             </div>
         </div>

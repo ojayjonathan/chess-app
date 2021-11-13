@@ -1,6 +1,6 @@
 import React from 'react'
 
-function GameControls({ undo, redo }) {
+function GameControls({ undo, redo,replay }) {
 
     const openMenu = () => {
         document.querySelector(".menu").classList.toggle("menu__open")
@@ -14,10 +14,10 @@ function GameControls({ undo, redo }) {
                         close
                     </span>
                     <hr className="m-0"/>
-                    <span>
+                    <span onClick={undo}>
                         <i class="material-icons" title="undo">
                             undo
-                        </i> Take back</span>
+                        </i> Undo</span>
                     <span>
                         <i class="material-icons" title="undo">
                             flag
@@ -38,7 +38,7 @@ function GameControls({ undo, redo }) {
                 <span class="material-icons">
                     skip_previous
                 </span>
-                <span class="material-icons">
+                <span class="material-icons" title="replay" onClick={replay}>
                     play_arrow
                 </span>
                 <span class="material-icons">

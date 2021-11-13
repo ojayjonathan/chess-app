@@ -1,26 +1,33 @@
-import ChessBoard from '../utils/chessboard'
+import ChessBoard from './chessboard'
 import Chess from "chess.js";
 import $ from 'jquery'
 import { pieceToUnicode } from '../ui/game';
+import music from "./gameSound"
+
 export function engineGame(options) {
-    options = options || {}
-    var game = new Chess();
-    var board;
+    options = options || {
+        showEvaluation: false,
+    }
+    let game = new Chess();
+    let board;
     /// We can load Stockfish via Web Workers or via STOCKFISH() if loaded from a <script> tag.
-    var engine = new Worker(options.stockfishjs || './stockfish.js');
-    var evaler = new Worker(options.stockfishjs || './stockfish.js');
-    var engineStatus = {};
-    var displayScore = true;
-    var time = { wtime: 300000, btime: 300000, winc: 2000, binc: 0 };
-    var playerColor = 'white';
-    var clockTimeoutID = null;
-    var isEngineRunning = false;
-    var evaluation_el = document.getElementById("evaluation");
-    var announced_game_over;
+    let engine = new Worker(options.stockfishjs || './stockfish.js');
+    let evaler = new Worker(options.stockfishjs || './stockfish.js');
+    let engineStatus = {};
+    let displayScore = true;
+    let time = { wtime: 300000, btime: 300000, winc: 2000, binc: 0 };
+    let playerColor = 'white';
+    let clockTimeoutID = null;
+    let isEngineRunning = false;
+    let evaluation_el = document.getElementById("evaluation");
+    let announced_game_over;
+    const gameMusic = music;
+    let fowarding = 0;
+    let gamePgn;
     // do not pick up pieces if the game is over
     // only pick up pieces for White
-    var onDragStart = function (source, piece, position, orientation) {
-        var re = playerColor==='white' ? /^b/ : /^w/
+    let onDragStart = function (source, piece, position, orientation) {
+        let re = playerColor === 'white' ? /^b/ : /^w/
         if (game.game_over() ||
             piece.search(re) !== -1) {
             return false;
@@ -35,6 +42,7 @@ export function engineGame(options) {
         if (game.game_over()) {
             announced_game_over = true;
             alert("Game Over");
+            $('#eval').html("-");
         }
     }, 1000);
 
@@ -45,10 +53,10 @@ export function engineGame(options) {
     }
     uciCmd('uci');
 
-    ///TODO: Eval starting posistions. I suppose the starting positions could be different in different chess varients.
+    ///TODO: Eval starting posistions. I suppose the starting positions could be different in different chess letients.
 
     function displayStatus() {
-        var status = 'Engine: ';
+        let status = 'Engine: ';
         if (!engineStatus.engineLoaded) {
             status += 'loading...';
         } else if (!engineStatus.engineReady) {
@@ -63,24 +71,24 @@ export function engineGame(options) {
                 status += (engineStatus.score.substr(0, 4) === "Mate" ? " " : ' Score: ') + engineStatus.score;
             }
         }
-        $('#engineStatus').html(status);
+        $('#eval').html(engineStatus.score);
     }
 
     function displayClock(color, t) {
-        var isRunning = false;
-        if (time.startTime > 0 && color===time.clockColor) {
+        let isRunning = false;
+        if (time.startTime > 0 && color === time.clockColor) {
             t = Math.max(0, t + time.startTime - Date.now());
             isRunning = true;
         }
 
 
-        var id = color===playerColor ? '#time2' : '#time1';
-        var sec = Math.ceil(t / 1000);
-        var min = Math.floor(sec / 60);
+        let id = color === playerColor ? '#time2' : '#time1';
+        let sec = Math.ceil(t / 1000);
+        let min = Math.floor(sec / 60);
         sec -= min * 60;
-        var hours = Math.floor(min / 60);
+        let hours = Math.floor(min / 60);
         min -= hours * 60;
-        var display = hours + ':' + ('0' + min).slice(-2) + ':' + ('0' + sec).slice(-2);
+        let display = hours + ':' + ('0' + min).slice(-2) + ':' + ('0' + sec).slice(-2);
 
         $(id).text(display);
 
@@ -101,8 +109,8 @@ export function engineGame(options) {
 
     function clockTick() {
         updateClock();
-        var t = (time.clockColor==='white' ? time.wtime : time.btime) + time.startTime - Date.now();
-        var timeToNextSecond = (t % 1000) + 1;
+        let t = (time.clockColor === 'white' ? time.wtime : time.btime) + time.startTime - Date.now();
+        let timeToNextSecond = (t % 1000) + 1;
         clockTimeoutID = setTimeout(clockTick, timeToNextSecond);
     }
 
@@ -112,9 +120,9 @@ export function engineGame(options) {
             clockTimeoutID = null;
         }
         if (time.startTime > 0) {
-            var elapsed = Date.now() - time.startTime;
+            let elapsed = Date.now() - time.startTime;
             time.startTime = null;
-            if (time.clockColor==='white') {
+            if (time.clockColor === 'white') {
                 time.wtime = Math.max(0, time.wtime - elapsed);
             } else {
                 time.btime = Math.max(0, time.btime - elapsed);
@@ -123,7 +131,7 @@ export function engineGame(options) {
     }
 
     function startClock() {
-        if (game.turn()==='w') {
+        if (game.turn() === 'w') {
             time.wtime += time.winc;
             time.clockColor = 'white';
         } else {
@@ -135,11 +143,11 @@ export function engineGame(options) {
     }
 
     function get_moves() {
-        var moves = '';
-        var history = game.history({ verbose: true });
+        let moves = '';
+        let history = game.history({ verbose: true });
 
-        for (var i = 0; i < history.length; ++i) {
-            var move = history[i];
+        for (let i = 0; i < history.length; ++i) {
+            let move = history[i];
             moves += ' ' + move.from + move.to + (move.promotion ? move.promotion : '');
         }
 
@@ -151,14 +159,16 @@ export function engineGame(options) {
         $('#pgn').text(pieceToUnicode(game.pgn()));
         board.position(game.fen(), false);
         updateClock();
-        var turn = game.turn()==='w' ? 'white' : 'black';
+        let turn = game.turn() === 'w' ? 'white' : 'black';
         if (!game.game_over()) {
-            if (turn != playerColor) {
-                uciCmd('position startpos moves' + get_moves());
-                uciCmd('position startpos moves' + get_moves(), evaler);
-                evaluation_el.textContent = "";
-                uciCmd("eval", evaler);
+            uciCmd('position startpos moves' + get_moves());
+            if (turn !== playerColor) {
+                if (options.showEvaluation) {
+                    uciCmd('position startpos moves' + get_moves(), evaler);
+                    evaluation_el.textContent = "";
+                    uciCmd("eval", evaler);
 
+                }
                 if (time && time.wtime) {
                     uciCmd("go " + (time.depth ? "depth " + time.depth : "") + " wtime " + time.wtime + " winc " + time.winc + " btime " + time.btime + " binc " + time.binc);
                 } else {
@@ -166,14 +176,14 @@ export function engineGame(options) {
                 }
                 isEngineRunning = true;
             }
-            if (game.history().length >= 2 && !time.depth && !time.nodes) {
+            if (game.history().length >= 1 && !time.depth && !time.nodes) {
                 startClock();
             }
         }
     }
 
     evaler.onmessage = function (event) {
-        var line;
+        let line;
 
         if (event && typeof event === "object") {
             line = event.data;
@@ -198,7 +208,7 @@ export function engineGame(options) {
     }
 
     engine.onmessage = function (event) {
-        var line;
+        let line;
         if (event && typeof event === "object") {
             line = event.data;
             console.log(line)
@@ -206,19 +216,30 @@ export function engineGame(options) {
             line = event;
         }
         console.log("Reply: " + line)
-        if (line==='uciok') {
+        if (line === 'uciok') {
             engineStatus.engineLoaded = true;
-        } else if (line==='readyok') {
+        } else if (line === 'readyok') {
             engineStatus.engineReady = true;
         } else {
-            var match = line.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/);
+            let match = line.match(/^bestmove ([a-h][1-8])([a-h][1-8])([qrbn])?/);
             /// Did the AI move?
             if (match) {
                 isEngineRunning = false;
-                game.move({ from: match[1], to: match[2], promotion: match[3] });
+                let move = game.move({ from: match[1], to: match[2], promotion: match[3] });
+                if (move) {
+                    if (move.flags.includes("c")) {
+                        gameMusic.capture.play()
+                    }
+                    else {
+                        gameMusic.move.play()
+
+                    }
+                }
                 prepareMove();
-                uciCmd("eval", evaler)
-                evaluation_el.textContent = "";
+                if (options.showEvaluation) {
+                    uciCmd("eval", evaler)
+                    evaluation_el.textContent = "";
+                }
                 //uciCmd("eval");
                 /// Is it sending feedback?
             } else if (match = line.match(/^info .*\bdepth (\d+) .*\bnps (\d+)/)) {
@@ -227,31 +248,41 @@ export function engineGame(options) {
 
             /// Is it sending feed back with a score?
             if (match = line.match(/^info .*\bscore (\w+) (-?\d+)/)) {
-                var score = parseInt(match[2]) * (game.turn()==='w' ? 1 : -1);
+                let score = parseInt(match[2]) * (game.turn() === 'w' ? 1 : -1);
                 /// Is it measuring in centipawns?
-                if (match[1]==='cp') {
+                if (match[1] === 'cp') {
                     engineStatus.score = (score / 100.0).toFixed(2);
                     /// Did it find a mate?
-                } else if (match[1]==='mate') {
-                    engineStatus.score = 'Mate in ' + Math.abs(score);
+                } else if (match[1] === 'mate') {
+                    engineStatus.score = '#' + Math.abs(score);
                 }
 
-                /// Is the score bounded?
-                if (match = line.match(/\b(upper|lower)bound\b/)) {
-                    engineStatus.score = ((match[1]==='upper')===(game.turn()==='w') ? '<= ' : '>= ') + engineStatus.score
-                }
+                // /// Is the score bounded?
+                // if (match = line.match(/\b(upper|lower)bound\b/)) {
+                //     engineStatus.score = ((match[1] === 'upper') === (game.turn() === 'w') ? '<= ' : '>= ') + engineStatus.score
+                // }
             }
         }
         displayStatus();
     };
 
-    var onDrop = function (source, target) {
+    let onDrop = function (source, target) {
         // see if the move is legal
-        var move = game.move({
+        let move = game.move({
             from: source,
             to: target,
             //promotion: document.getElementById("promote").value
         });
+        if (move) {
+            console.log(move)
+            if (move.flags.includes("c")) {
+                gameMusic.capture.play()
+            }
+            else {
+                gameMusic.move.play()
+
+            }
+        }
         // illegal move
         if (move === null) return 'snapback';
 
@@ -260,11 +291,11 @@ export function engineGame(options) {
 
     // update the board position after the piece snap
     // for castling, en passant, pawn promotion
-    var onSnapEnd = function () {
+    let onSnapEnd = function () {
         board.position(game.fen(), false);
     };
 
-    var cfg = {
+    let cfg = {
         showErrors: true,
         draggable: true,
         position: 'start',
@@ -280,20 +311,20 @@ export function engineGame(options) {
         flip: () => {
             board.flip()
         },
-        reset: function () {
+        reset: () => {
             game.reset();
             uciCmd('setoption name Contempt value 0');
             //uciCmd('setoption name Skill Level value 20');
             this.setSkillLevel(0);
             uciCmd('setoption name King Safety value 0'); /// Agressive 100 (it's now symetric)
         },
-        loadPgn: function (pgn) { game.load_pgn(pgn); },
-        setPlayerColor: function (color) {
+        loadPgn: (pgn) => { game.load_pgn(pgn); },
+        setPlayerColor: (color) => {
             playerColor = color;
             board.orientation(playerColor);
         },
-        setSkillLevel: function (skill) {
-            var max_err,
+        setSkillLevel: (skill) => {
+            let max_err,
                 err_prob,
                 difficulty_slider;
 
@@ -329,26 +360,26 @@ export function engineGame(options) {
             uciCmd('setoption name Skill Level Maximum Error value ' + max_err);
             uciCmd('setoption name Skill Level Probability value ' + err_prob);
         },
-        setTime: function (baseTime, inc) {
+        setTime: (baseTime, inc) => {
             time = { wtime: baseTime * 1000, btime: baseTime * 1000, winc: inc * 1000, binc: inc * 1000 };
         },
-        setDepth: function (depth) {
+        setDepth: (depth) => {
             time = { depth: depth };
         },
-        setNodes: function (nodes) {
+        setNodes: (nodes) => {
             time = { nodes: nodes };
         },
-        setContempt: function (contempt) {
+        setContempt: (contempt) => {
             uciCmd('setoption name Contempt value ' + contempt);
         },
-        setAggressiveness: function (value) {
+        setAggressiveness: (value) => {
             uciCmd('setoption name Aggressiveness value ' + value);
         },
-        setDisplayScore: function (flag) {
+        setDisplayScore: (flag) => {
             displayScore = flag;
             displayStatus();
         },
-        start: function () {
+        start: () => {
             uciCmd('ucinewgame');
             uciCmd('isready');
             engineStatus.engineReady = false;
@@ -356,9 +387,10 @@ export function engineGame(options) {
             displayStatus();
             prepareMove();
             announced_game_over = false;
-            return this
+
         },
-        undo: function () {
+
+        undo: () => {
             if (isEngineRunning)
                 return false;
             game.undo();
@@ -367,6 +399,25 @@ export function engineGame(options) {
             displayStatus();
             prepareMove();
             return true;
+        },
+
+        replay: () => {
+            let i = 0;
+            let h = game.history()
+            game.reset()
+            board.position(game.fen())
+            const update = () => {
+                if (i < h.length) {
+                    game.move(h[i])
+                    board.position(game.fen())
+
+                }
+                else {
+                    clearInterval(r)
+                }
+                i += 1;
+            }
+            const r = setInterval(update, 300)
         }
     };
 }
