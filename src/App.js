@@ -1,11 +1,25 @@
 import Layout from "./components/layout/layout";
-import Game from "./ui/game";
+import Game from "./components/playComputer/game";
+import "./board.css";
+import Home from "./components/home";
+import Puzzle from "./components/puzzles";
+import { Routes, Route } from "react-router-dom";
+import Practice from "./components/practice";
+import { APP_ROUTES } from "./utils/constants";
+import Basics from "./components/practice/basics";
 
 function App() {
   return (
     <Layout>
-  
-          <Game />
+      <Routes>
+        {/* {let resolved = useResolvedPath(to);
+  let match = useMatch({ path: resolved.pathname, end: true });} */}
+        <Route path={APP_ROUTES.playComputer} element={<Game />} />
+        <Route path={APP_ROUTES.puzzles} element={<Puzzle />} />
+        <Route path={APP_ROUTES.practice} element={<Practice />} />
+        <Route path={APP_ROUTES.basics} element={<Basics />} />
+        <Route path={APP_ROUTES.home} element={<Home />} />
+      </Routes>
     </Layout>
   );
 }

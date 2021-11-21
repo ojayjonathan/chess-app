@@ -1,0 +1,26 @@
+.home__info button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.home__btn_primary {
+  background-color: var(--active);
+  color: #fff;
+}
+
+.home__info button:hover {
+  opacity: 0.8;
+}
+@media (max-width: 620px) {
+  .home__info {
+    margin-bottom: 1rem;
+  }
+  .home{
+    flex-direction: column-reverse;
+  }
+}

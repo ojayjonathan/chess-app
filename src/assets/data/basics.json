@@ -1,0 +1,98 @@
+{
+    "Movement": [
+        {
+            "name": "Rook",
+            "description": "Moves in straight lines",
+            "icon": "wR"
+        },
+        {
+            "name": "King",
+            "description": "Moves on square all direction",
+            "icon": "wK"
+        },
+        {
+            "name": "knight",
+            "description": "Moves in L shape",
+            "icon": "wN"
+        },
+        {
+            "name": "Bishop",
+            "description": "Moves diagonaly",
+            "icon": "wB"
+        },
+        {
+            "name": "Queen",
+            "description": "moves=rook + bishop",
+            "icon": "wQ"
+        },
+        {
+            "name": "Pawn",
+            "description": "moves 1 quare foward",
+            "icon": "wP"
+        }
+    ],
+    "Captures": [
+        {
+            "name": "Rook",
+            "description": "Moves in straight lines",
+            "icon": "wR"
+        },
+        {
+            "name": "King",
+            "description": "Moves on square all direction",
+            "icon": "wK"
+        },
+        {
+            "name": "knight",
+            "description": "Moves in L shape",
+            "icon": "wN"
+        },
+        {
+            "name": "Bishop",
+            "description": "Moves diagonaly",
+            "icon": "wB"
+        },
+        {
+            "name": "Queen",
+            "description": "moves=rook + bishop",
+            "icon": "wQ"
+        },
+        {
+            "name": "Pawn",
+            "description": "moves 1 quare foward",
+            "icon": "wP"
+        }
+    ],
+    "Funtamentals": [
+        {
+            "name": "Protection",
+            "description": "protect your pieces"
+        },
+        {
+            "name": "smothered Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "dovetail Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "anastasia Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "arabian Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "hook Mate",
+            "description": "Recognize the patterns"
+        }
+    ],
+    "defence": [
+        {
+            "name": "defensive Move",
+            "description": "defend"
+        }
+    ]
+}

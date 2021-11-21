@@ -1,0 +1,88 @@
+.practice h2 {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--light-white);
+}
+.category__items {
+  display: flex;
+  flex-wrap: wrap;
+}
+.category_name {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #5e5e66 !important;
+}
+.practice__card {
+  background: var(--dark);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+  color: var(--light-white);
+  text-transform: capitalize;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  min-height: 60px;
+}
+.practice__card::after {
+  position: absolute;
+  width: 100%;
+  content: "";
+  height: 5px;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 5px 5px;
+  background-color: #8338ec;
+}
+.basic .practice__card {
+  justify-content: start;
+}
+.practice__card:hover {
+  background-color: #1d1e22;
+}
+.practice__card__title {
+  font-weight: 500;
+}
+.practice__categories {
+  margin-top: 2rem;
+}
+.practice_icon {
+  width: 50px;
+  height: 50px;
+  opacity: 0.7;
+}
+
+.c0 .practice__card::after {
+  background-color: #f99927;
+}
+.c1 .practice__card::after {
+  background-color: #008b8b;
+}
+.c2 .practice__card::after {
+  background-color: #1ec65b;
+}
+.c3 .practice__card::after {
+  background-color: #e83535;
+}
+.c5 .practice__card::after {
+  background-color: #ee9b00;
+}
+.c4 .practice__card::after {
+  background-color: #219ebc;
+}
+.c6 .practice__card::after {
+  background-color: #b5179e;
+}
+.c8.practice__card::after {
+  background-color: #4d194d;
+}
+/* b5179e */
+/* "#e83535",
+"#1ec65b",
+"#8338ec",
+"#f99927",
+"#ee9b00",
+"#219ebc", */

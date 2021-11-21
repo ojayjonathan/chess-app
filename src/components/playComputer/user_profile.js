@@ -5,7 +5,7 @@ import './index.css'
 function UserProfile({ user }) {
 
     return (
-        <div className="game-user">
+        <div className="game__user">
             <div className="">
                 <div className="name">{user.username}</div>
             </div>

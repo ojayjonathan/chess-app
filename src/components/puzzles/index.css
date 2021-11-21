@@ -1,0 +1,39 @@
+.puzzle__info {
+  background-color: var(--dark);
+  align-self: stretch;
+  display: flex;
+  color: var(--light-white);
+  justify-content: center;
+  padding: 10px;
+  flex-direction: column;
+}
+.puzzle__details {
+  flex: 1;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.puzzle__theme {
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+.puzzle .status {
+  display: flex;
+  justify-content: center;
+}
+.puzzle button {
+  background-color: #3d3b39;
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: var(--light-white);
+  font-weight: bold;
+}
+
+.puzzle__info good,
+.puzzle__info bad {
+  font-size: 32px;
+}

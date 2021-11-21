@@ -1,0 +1,180 @@
+{
+    "attacks": [
+        {
+            "name": "xRay Attack",
+            "description": " xRays"
+        },
+        {
+            "name": "queenside Attack",
+            "description": "queenside Attack"
+        },
+        {
+            "name": "kingside Attack",
+            "description": "kingside Attack"
+        }
+    ],
+    "basic tactics": [
+        {
+            "name": "fork",
+            "description": "Double attack"
+        },
+        {
+            "name": "skewer",
+            "description": "skewers"
+        },
+        {
+            "name": "pin",
+            "description": "pin"
+        },
+        {
+            "name": "capturing Defender",
+            "description": "overloaded piece"
+        },
+        {
+            "name": "discovered Attack",
+            "description": "Discovered attacks"
+        },
+        {
+            "name": "double Check",
+            "description": "Double check"
+        },
+        {
+            "name": "intermezzo",
+            "description": "In-between move"
+        }
+    ],
+    "basicmate": [
+        {
+            "name": "back Rank Mate",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "mate In 4",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "double Bishop Mate",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "mate In 5",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "mate In 3",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "mate In 2",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "mate",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "back Rank Mate",
+            "description": "basic checkmate"
+        },
+        {
+            "name": "mate In 1",
+            "description": "basic checkmate"
+        }
+    ],
+    "checkmate": [
+        {
+            "name": "boden Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "smothered Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "dovetail Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "anastasia Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "arabian Mate",
+            "description": "Recognize the patterns"
+        },
+        {
+            "name": "hook Mate",
+            "description": "Recognize the patterns"
+        }
+    ],
+    "defence": [
+        {
+            "name": "defensive Move",
+            "description": "defend"
+        }
+    ],
+    "endgame": [
+        {
+            "name": "queenRook Endgame",
+            "description": "queen and rook Endgame"
+        },
+        {
+            "name": "queen Endgame",
+            "description": "queen Endgame"
+        },
+        {
+            "name": "bishop Endgame",
+            "description": "bishop Endgame"
+        },
+        {
+            "name": "rook Endgame",
+            "description": "rook endgame"
+        },
+        {
+            "name": "pawn Endgame",
+            "description": "Promote to win"
+        },
+        {
+            "name": "endgame",
+            "description": "endgame"
+        },
+        {
+            "name": "knight Endgame",
+            "description": "Horsing"
+        }
+    ],
+    "intermediate tactics": [
+        {
+            "name": "deflection",
+            "description": "deflection"
+        },
+        {
+            "name": "zugzwang",
+            "description": "Forced move"
+        },
+        {
+            "name": "sacrifice",
+            "description": "sacrifice piece"
+        },
+        {
+            "name": "quiet Move",
+            "description": "Waiting move"
+        },
+        {
+            "name": "interference",
+            "description": "Interpose a piece to great effect"
+        }
+    ],
+    "middlegame": [
+        {
+            "name": "middlegame",
+            "description": "middlegame"
+        }
+    ],
+    "opening": [
+        {
+            "name": "opening",
+            "description": "opening"
+        }
+    ]
+}
