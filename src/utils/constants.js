@@ -8,4 +8,5 @@ export const APP_ROUTES = {
   stat: "/stats/",
   boardEditor: "/board-editor/",
   createPuzzle: "/create-puzzle/",
+  lessons: "/learn/practice/",
 };

@@ -26,6 +26,7 @@
   padding: 15px;
   width: 100%;
   border-radius: 8px;
+  position: relative;
 }
 
 #board {
@@ -82,4 +83,9 @@
     width: 100%;
     max-width: 400px;
   }
+}
+
+.square_highlight__active{
+
+  box-shadow: inset 0 0 3px 3px var(--success);
 }

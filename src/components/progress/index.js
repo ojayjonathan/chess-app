@@ -59,3 +59,39 @@ export const TextIndicator = (props) => {
     </svg>
   );
 };
+
+export const ProgressBar = ({ width, height, progress, outlineColor }) => {
+  const color =
+    outlineColor || (progress < 50 ? "var(--text-denger)" : "#1ec65b");
+  return (
+    <svg height={height} width={width}>
+      <line
+        strokeLinecap="round"
+        x1={height / 2}
+        y1={height / 2}
+        y2={height / 2}
+        stroke={color}
+        strokeWidth={height}
+        x2={Math.max((progress / 100) * width - height / 2,height/2)}
+      ></line>
+      <line
+        strokeLinecap="round"
+        x1={height / 2}
+        y1={height / 2}
+        y2={height / 2}
+        stroke={"rgba(255,255,255,.3)"}
+        strokeWidth={height}
+        x2={width - height / 2}
+      ></line>
+      <text
+        className="w-text"
+        x="50%"
+        y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+      >
+        {Math.floor(progress)}%
+      </text>
+    </svg>
+  );
+};

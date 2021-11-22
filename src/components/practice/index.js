@@ -2,6 +2,7 @@ import React from "react";
 import data from "../../assets/data/category.json";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import { APP_ROUTES } from "../../utils/constants";
 
 function Practice() {
   const nagigator = useNavigate();
@@ -22,7 +23,7 @@ function Practice() {
                     item={item}
                     onClick={() => {
                       nagigator({
-                        pathname: "/puzzles",
+                        pathname: APP_ROUTES.lessons,
                         search: "",
                         hash: "",
                         state: { fromPopup: true },

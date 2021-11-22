@@ -1660,6 +1660,9 @@ import $ from "jquery";
       $(`.square-${from}`).addClass("square_highlight");
       $(`.square-${to}`).addClass("square_highlight");
     };
+    widget.highlightSquare = (sq) => {
+      $(`.square-${sq}`).addClass("square_highlight");
+    };
     // -------------------------------------------------------------------------
     // Browser Events
     // -------------------------------------------------------------------------
@@ -1683,13 +1686,14 @@ import $ from "jquery";
 
     function touchstartSquare(e) {
       // do nothing if we're not draggable
-      e.preventDefault();
-      if (!config.draggable) return;
 
+      if (!config.draggable) return;
       // do nothing if there is no piece on this square
       let square = $(this).attr("data-square");
       if (!validSquare(square)) return;
       if (!currentPosition.hasOwnProperty(square)) return;
+      //TO DO -fix
+      // e.preventDefault();
 
       e = e.originalEvent;
       beginDraggingPiece(

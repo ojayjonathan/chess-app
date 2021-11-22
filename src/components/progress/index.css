@@ -5,4 +5,13 @@
 }
 text {
     fill: currentColor;
+  
+  
   }
+  line{
+    overflow: hidden;
+  }
+.w-text{
+  color: #fff;
+}
+

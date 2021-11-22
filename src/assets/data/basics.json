@@ -3,7 +3,56 @@
         {
             "name": "Rook",
             "description": "Moves in straight lines",
-            "icon": "wR"
+            "icon": "wR",
+            "lessons": [
+                {
+                    "position": {
+                        "a1": "wR"
+                    },
+                    "highlighted_squares": [],
+                    "arrows": [
+                        {
+                            "from": "a1",
+                            "to": "a8"
+                        },
+                        {
+                            "from": "a1",
+                            "to": "h1"
+                        }
+                    ],
+                    "instruction": "The rook moves in straight line as highlighted"
+                },
+                {
+                    "position": {
+                        "a1": "wR"
+                    },
+                    "highlighted_squares": [
+                        "a8",
+                        "h1"
+                    ],
+                    "arrows": [],
+                    "instruction": "Move the rook to highlighted squares"
+                },
+                {
+                    "position": {
+                        "a1": "wR"
+                    },
+                    "highlighted_squares": [
+                        "h8"
+                    ],
+                    "arrows": [
+                        {
+                            "from": "a1",
+                            "to": "a8"
+                        },
+                        {
+                            "from": "a8",
+                            "to": "h8"
+                        }
+                    ],
+                    "instruction": "Drag the rook to the highlighte square"
+                }
+            ]
         },
         {
             "name": "King",

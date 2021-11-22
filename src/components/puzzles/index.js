@@ -34,8 +34,9 @@ function Puzzle() {
         setSolve("Correct");
         if (!puzzle.complete()) {
           setTimeout(() => {
-            chess.move(puzzle.getCurrentMove());
+            let move = chess.move(puzzle.getCurrentMove());
             board.current.position(chess.fen(), false);
+            board.current.highlightMove(move.from, move.to);
             puzzle.currentMove += 1;
           }, 300);
         }
@@ -72,15 +73,8 @@ function Puzzle() {
     chess.move(puzzle.getCurrentMove());
     board.current.position(chess.fen(), false);
     puzzle.currentMove += 1;
-    setSolve("Incorrect");
-    if (!puzzle.complete()) {
-      setTimeout(() => {
-        chess.move(puzzle.getCurrentMove());
-        board.current.position(chess.fen(), false);
-        puzzle.currentMove += 1;
-      }, 300);
-    }
-    setComplete(puzzle.complete());
+    setSolve("Retry");
+    setComplete(true);
   };
   React.useEffect(() => {
     board.current = ChessBoard("board", cfg);
@@ -94,45 +88,56 @@ function Puzzle() {
         </div>
       </div>
       <div className="puzzle__info two_column_layout__item">
-        <div className="puzzle__theme">{puzzle.themes}</div>
-        <div className="puzzle__details">
-          <div className="status">
-            {solve === "Your turn" ? (
+        <div
+          className={`puzzle__top ${
+            solve === "Correct" ? "good" : solve === "Incorrect" ? "bad" : ""
+          }`}
+        >
+          {solve === "Correct" && (
+            <>
+              <span className="material-icons">done</span>
+              <div>
+                <span>{`${move.san} Is correct`}</span>
+                <small>{complete ? "Sucess!" : "keep going.."}</small>
+              </div>
+            </>
+          )}
+          {solve === "Incorrect" && (
+            <>
+              <span className="material-icons">close</span>
+              <div>
+                <span>{`${move.san} Incorrect `}</span>
+                <small>try again</small>
+              </div>
+            </>
+          )}
+          {solve === "Your turn" && (
+            <>
               <img
                 src={playerColor === "w" ? wK : bK}
                 alt={`${playerColor} to move`}
                 className="piece_icon"
               />
-            ) : (
-              <>
-                {solve === "Correct" ? (
-                  <good className="material-icons">done</good>
-                ) : (
-                  <bad className="material-icons">close</bad>
-                )}
-              </>
-            )}
-            <div>
               <div>
-                {solve === "Correct" ? `${move.san} is correct` : solve}
-              </div>
-              {complete ? (
-                <small>Sucess!</small>
-              ) : (
+                <span>Your turn</span>
                 <small>
-                  {solve === "Your turn" ? (
-                    playerColor === "w" ? (
-                      "white to play"
-                    ) : (
-                      "black to play"
-                    )
-                  ) : (
-                    <>{solve === "Correct" ? "keep moving..." : "try again"}</>
-                  )}
+                  {playerColor === "w" ? "white to play" : "black to play"}
                 </small>
-              )}
-            </div>
-          </div>
+              </div>
+            </>
+          )}
+          {solve === "Retry" && (
+            <>
+              <span className="material-icons">autorenew</span>
+              <div>
+                <span>Retry</span>
+                <small>try again</small>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="puzzle__details">
+          <div className="status"></div>
           {complete ? (
             <button className="active">Next Puzzle</button>
           ) : (

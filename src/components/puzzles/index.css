@@ -3,27 +3,19 @@
   align-self: stretch;
   display: flex;
   color: var(--light-white);
-  justify-content: center;
-  padding: 10px;
+  justify-content: space-between;
+  padding-bottom: 10px;
   flex-direction: column;
+  overflow: hidden;
 }
 .puzzle__details {
-  flex: 1;
   align-items: center;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
 }
-.puzzle__theme {
-  text-align: center;
-  text-transform: capitalize;
-  margin-bottom: 10px;
-}
-.puzzle .status {
-  display: flex;
-  justify-content: center;
-}
+
 .puzzle button {
   background-color: #3d3b39;
   margin: 10px;
@@ -36,4 +28,29 @@
 .puzzle__info good,
 .puzzle__info bad {
   font-size: 32px;
+}
+
+.puzzle__top {
+  padding: 5px 10px;
+  display: flex;
+  width: 100%;
+  align-self: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  background-color: rgba(255,255,255,.1);
+  transition:background-color .2s ease ;
+}
+.puzzle__top .material-icons {
+  font-size: 32px;
+  margin-right: .5rem;
+}
+.puzzle__top span {
+  display: block;
+}
+.good {
+  background-color: var(--active);
+}
+.bad {
+  background-color: var(--text-denger);
 }

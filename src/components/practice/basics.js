@@ -3,6 +3,7 @@ import data from "../../assets/data/basics.json";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import pieceTheme from "../../utils/pieceTheme";
+import {APP_ROUTES} from '../../utils/constants'
 
 function Basics() {
   const nagigator = useNavigate();
@@ -23,7 +24,7 @@ function Basics() {
                     item={item}
                     onClick={() => {
                       nagigator({
-                        pathname: "/puzzles",
+                        pathname: APP_ROUTES.lessons,
                         search: "",
                         hash: "",
                         state: { fromPopup: true },

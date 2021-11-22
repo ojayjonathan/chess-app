@@ -11,7 +11,6 @@ function Layout({ children }) {
     <div className="layout">
       <div className="sidebar">
         <div className="sidebar__top">
-          <hr />
           <ul>
             <li className="header">Learn</li>
             <li>
@@ -31,7 +30,7 @@ function Layout({ children }) {
               </Link>
             </li>
           </ul>
-          <hr />
+
           <ul>
             <li className="header">Play</li>
             <li>
@@ -49,7 +48,7 @@ function Layout({ children }) {
               </Link>
             </li>
           </ul>
-          <hr />
+
           <ul>
             <li className="header">Tools</li>
             <li>

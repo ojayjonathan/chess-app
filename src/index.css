@@ -25,7 +25,7 @@ code {
 :root {
   --board-sq-dark: #b58863;
   --board-sq-light: #efd7cd;
-  --dark: #111116;
+  --dark: #2c2c2c;
   --bg: #060606;
   --success: #42ba96;
   --gray: #2c303a;
@@ -33,6 +33,8 @@ code {
   --active: #87986a;
   --light-white: rgb(186, 186, 186);
   --muted: rgba(186, 186, 186, 0.6);
+  --text-denger: #c33;
+  --border-color: rgba(186, 186, 186, 0.25);
 }
 
 * {
@@ -72,7 +74,7 @@ good {
   color: #629924;
 }
 bad {
-  color: #c33;
+  color: var(--text-denger);
 }
 button {
   cursor: pointer;
@@ -92,10 +94,14 @@ button {
     width: 33.3%;
   }
 }
-a{
+a {
   color: inherit;
   text-decoration: none;
 }
-.expand{
+.expand {
   flex: 1;
+}
+
+.d_block {
+  display: block;
 }
