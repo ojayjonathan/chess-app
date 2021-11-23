@@ -42,13 +42,9 @@ function PracticeLessons() {
   const openListItem = (id) => {
     const expanded = document.querySelector(`.list__expand`);
     const toExpand = document.querySelector(`#item-${id} ul`);
-    console.log(expanded, toExpand);
-    if (expanded === toExpand) return;
-    else {
-      toExpand.classList.replace("colapsed", "list__expand");
-      if (expanded) {
-        expanded.classList.replace("list__expand", "colapsed");
-      }
+    toExpand.classList.replace("colapsed", "list__expand");
+    if (expanded) {
+      expanded.classList.replace("list__expand", "colapsed");
     }
   };
   return (
@@ -125,11 +121,11 @@ function PracticeLessons() {
                 {data[key].map((item) => (
                   <li>
                     {item.name}
-                    <ProgressBar
+                    {/* <ProgressBar
                       progress={Math.random() * 100}
                       height={20}
                       width={150}
-                    />
+                    /> */}
                   </li>
                 ))}
               </ul>
