@@ -6,9 +6,7 @@
             "icon": "wR",
             "lessons": [
                 {
-                    "position": {
-                        "a1": "wR"
-                    },
+                    "fen": "8/8/8/8/8/8/8/R7 w - - 0 78",
                     "highlighted_squares": [],
                     "arrows": [
                         {
@@ -23,9 +21,7 @@
                     "instruction": "The rook moves in straight line as highlighted"
                 },
                 {
-                    "position": {
-                        "a1": "wR"
-                    },
+                    "fen": "8/8/8/8/8/8/8/R7 w - - 0 78",
                     "highlighted_squares": [
                         "a8",
                         "h1"
@@ -34,9 +30,7 @@
                     "instruction": "Move the rook to highlighted squares"
                 },
                 {
-                    "position": {
-                        "a1": "wR"
-                    },
+                    "fen": "8/8/8/8/8/8/8/R7 w - - 0 78",
                     "highlighted_squares": [
                         "h8"
                     ],

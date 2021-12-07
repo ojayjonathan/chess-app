@@ -96,6 +96,7 @@
   overflow: hidden;
   background-color: var(--dark);
   align-self: stretch;
+  max-height: 430px;
   color: var(--light-white);
   padding-bottom: 10px;
   text-transform: capitalize;
@@ -165,12 +166,13 @@ ul {
   list-style-type: none;
 }
 
+/* paginator */
 .page {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 10px;
-  margin: 0;
+  margin: 0 0 10px;
 }
 .page__numbers,
 .page__btn {
@@ -196,6 +198,9 @@ ul {
 
 .description {
   color: var(--light-white);
-  margin: 5px;
+  margin: 10px 5px;
   font-size: 14px;
+  transition: height 1s linear;
+  height: 70px;
+  font-weight: 600;
 }

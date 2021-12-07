@@ -23,6 +23,7 @@ code {
 /* #383433 */
 
 :root {
+  --active-link:#5B4037;
   --board-sq-dark: #b58863;
   --board-sq-light: #efd7cd;
   --dark: #2c2c2c;
@@ -104,4 +105,8 @@ a {
 
 .d_block {
   display: block;
+}
+
+.hidden{
+  visibility: hidden;
 }

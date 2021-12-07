@@ -7,9 +7,10 @@ function Layout({ children }) {
   const openSideBar = () => {
     document.querySelector(".sidebar").classList.toggle("open");
   };
+
   return (
     <div className="layout">
-      <div className="sidebar">
+      <div className="sidebar" onClick={openSideBar}>
         <div className="sidebar__top">
           <ul>
             <li className="header">Learn</li>
@@ -65,13 +66,7 @@ function Layout({ children }) {
           </ul>
         </div>
         <div className="profile">
-          {/* <div>
-            <span
-              className="profile__img"
-              style={{ backgroundImage: `url(${profile})` }}
-            ></span>
-          </div> */}
-          <span>Player 1</span>
+          <span>Player </span>
           <span className="material-icons">settings</span>
         </div>
       </div>

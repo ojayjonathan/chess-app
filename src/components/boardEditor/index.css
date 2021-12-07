@@ -1,0 +1,73 @@
+.editor .pieces {
+  margin: 5px 10px;
+  border: 1px solid rgba(162, 162, 162, 0.37);
+  border-radius: 5px;
+}
+.editor .pieces button {
+  background-color: #333;
+  margin: 10px 5px;
+  border: 1px solid rgba(162, 162, 162, 0.37);
+  border-radius: 5px;
+  color: var(--light-white);
+  font-weight: bold;
+  max-width: 40px;
+}
+.edit_mode {
+  margin-top: 5;
+}
+.mark button,
+.edit_mode button {
+  background-color: #333;
+  margin: 5px 10px;
+  border: 1px solid rgba(162, 162, 162, 0.37);
+  border-radius: 5px;
+  color: var(--light-white);
+  font-weight: bold;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.game_status {
+  margin: 5px 10px;
+}
+.game_status .d_flex > div {
+  max-width: 200px;
+  width: 100%;
+}
+.to_play {
+  margin-bottom: 0.2rem;
+}
+.fen {
+  flex: 1;
+  margin: 14px 10px;
+  display: flex;
+  align-items: flex-end;
+}
+.fen button,
+.fen input,.mark select {
+  background-color: #333;
+  border: 1px solid rgba(162, 162, 162, 0.37);
+  border-radius: 5px;
+  color: var(--light-white);
+  font-weight: bold;
+  padding: 5px 8px;
+}
+.fen button {
+  margin-left: 10px;
+}
+.mark button {
+  display: block;
+}
+.delete_btn {
+  background: var(--text-denger) !important;
+  color: #fff !important;
+}
+.mark input{
+  border: 1px solid rgba(162, 162, 162, 0.37);
+}
+.mark_options>div{
+  margin: 5px 10px;
+
+}
+.mark label {
+  margin-bottom: .5rem;
+}

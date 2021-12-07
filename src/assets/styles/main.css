@@ -1,0 +1,67 @@
+.d_flex {
+  display: flex;
+}
+.w_100 {
+  width: 100%;
+}
+.justify_content_center {
+  justify-content: center;
+}
+.justify_content_between {
+  justify-content: space-between;
+}
+.align_items_center {
+  align-items: center;
+}
+.align_self_stretch {
+  align-self: stretch;
+}
+.flex_column {
+  flex-direction: column;
+}
+.overflow_hidden {
+  overflow: hidden;
+}
+.b_dark {
+  color: var(--light-white);
+  background-color: var(--dark);
+}
+
+.good {
+  background-color: var(--active);
+}
+.bad {
+  background-color: var(--text-denger);
+}
+.card_dark {
+  background-color: #333;
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: var(--light-white);
+  box-shadow: rgba(0, 0, 0, 0.1) -2px 0 5px;
+}
+.m_0 {
+  margin: 0;
+}
+.card_dark h1,
+.card_dark h2,
+.card_dark h3,
+.card_dark h4,
+.card_dark h5 {
+  margin: 0.5rem 0;
+}
+.light_btn .card_dark .button {
+  padding: 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) -2px 0 5px;
+}
+
+.d_block {
+  display: block;
+}
+.f_32{
+    font-size: 32;
+}
+.wrap{
+    flex-wrap: wrap;
+}

@@ -1,17 +1,12 @@
 import React from "react";
 import "./index.css";
-import ChessBoard from "../../utils/chessboard";
+import { Chessboard } from "../../utils/chessboard/Chessboard";
 
 function Home() {
   const board = React.useRef();
-  let cfg = {
-    showErrors: true,
-    draggable: true,
-    position: "start",
-    pieceTheme: "assets/pieces/{piece}.svg",
-  };
+
   React.useEffect(() => {
-    board.current = ChessBoard("board", cfg);
+    board.current = new Chessboard(document.getElementById("board"));
   });
   return (
     <div className="home two_column_layout">

@@ -1,19 +1,46 @@
-import ChessBoard from "./chessboard";
+// import ChessBoard from "./chessboard";
+import {
+  BORDER_TYPE,
+  COLOR,
+  MARKER_TYPE,
+  Chessboard,
+  INPUT_EVENT_TYPE,
+} from "./chessboard/Chessboard";
 import Chess from "chess.js";
-import $ from "jquery";
 import { pieceToUnicode } from "./displayPgn";
 import music from "./gameSound";
-import pieceTheme from "./pieceTheme";
+import pieceSet from "../assets/images/chessboard-sprite-staunty.svg";
 
-export function engineGame(options) {
+const $ = (selector) => {
+  const elements = document.querySelectorAll(selector);
+  return {
+    addClass: (cssClass) => {
+      elements &&
+        elements.forEach((element) => element.classList.add(cssClass));
+    },
+    removeClass: (cssClass) => {
+      elements &&
+        elements.forEach((element) => element.classList.remove(cssClass));
+    },
+    html: (html) => {
+      elements && html && (elements[0].innerHTML = html);
+    },
+    text: (text) => {
+      elements && text && (elements[0].textContent = text);
+    },
+  };
+};
+
+export const engineGame = (options) => {
   options = options || {
     showEvaluation: true,
   };
   let game = new Chess();
   let board;
+  // /home/ojay/dev/web/chess_app/public/static/stockfish.min.js
 
-  let engine = new Worker("/stockfish.js");
-  let evaler = new Worker("/stockfish.js");
+  let engine = new Worker("/static/stockfish.min.js");
+  let evaler = new Worker("/static/stockfish.min.js");
   let engineStatus = {};
   let displayScore = true;
   let time = { wtime: 300000, btime: 300000, winc: 2000, binc: 0 };
@@ -23,14 +50,6 @@ export function engineGame(options) {
   let evaluation_el = document.getElementById("evaluation");
   let announced_game_over;
   const gameMusic = music;
-  // do not pick up pieces if the game is over
-  // only pick up pieces for White
-  let onDragStart = function (source, piece) {
-    let re = playerColor === "white" ? /^b/ : /^w/;
-    if (game.game_over() || piece.search(re) !== -1) {
-      return false;
-    }
-  };
 
   setInterval(function () {
     if (announced_game_over) {
@@ -160,7 +179,7 @@ export function engineGame(options) {
   function prepareMove() {
     stopClock();
     $("#pgn").html(pieceToUnicode(game.pgn()));
-    board.position(game.fen(), false);
+    board.setPosition(game.fen(), false);
     updateClock();
     let turn = game.turn() === "w" ? "white" : "black";
     if (!game.game_over()) {
@@ -286,16 +305,14 @@ export function engineGame(options) {
     displayStatus();
   };
   const highlightMove = (from, to) => {
-    $(`.square_highlight`).removeClass("square_highlight");
-    $(`.square-${from}`).addClass("square_highlight");
-    $(`.square-${to}`).addClass("square_highlight");
+    board.removeMarkers(undefined, MARKER_TYPE.square);
+    board.addMarker(from, MARKER_TYPE.square);
+    board.addMarker(to, MARKER_TYPE.square);
   };
   let onDrop = function (source, target) {
-    // see if the move is legal
     let move = game.move({
       from: source,
       to: target,
-      //promotion: document.getElementById("promote").value
     });
 
     if (move) {
@@ -306,33 +323,48 @@ export function engineGame(options) {
         gameMusic.move.play();
       }
     }
+
     // illegal move
-    if (move === null) return "snapback";
-
+    if (move === null) return false;
     prepareMove();
+    return true;
   };
 
-  // update the board position after the piece snap
-  // for castling, en passant, pawn promotion
-  let onSnapEnd = function () {
-    board.position(game.fen(), false);
+  const props = {
+    position: "start", // set as fen, "start" or "empty"
+    orientation: COLOR.white, // white on bottom
+    style: {
+      cssClass: "default",
+      showCoordinates: true, // show ranks and files
+      borderType: BORDER_TYPE.thin, // thin: thin border, frame: wide border with coordinates in it, none: no border
+      aspectRatio: 1, // height/width. Set to `undefined`, if you want to define it only in the css.
+      moveFromMarker: MARKER_TYPE.frame, // the marker used to mark the start square
+      moveToMarker: MARKER_TYPE.frame, // the marker used to mark the square where the figure is moving to
+    },
+    responsive: true, // resizes the board based on element size
+    animationDuration: 300, // pieces animation duration in milliseconds
+    sprite: {
+      url: pieceSet, // pieces and markers are stored as svg sprite
+      size: 40, // the sprite size, defaults to 40x40px
+      cache: true, // cache the sprite inline, in the HTML
+    },
   };
 
-  let cfg = {
-    showErrors: true,
-    draggable: true,
-    position: "start",
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onSnapEnd: onSnapEnd,
-    pieceTheme: pieceTheme,
-  };
-
-  board = ChessBoard("board", cfg);
-
+  board = new Chessboard(document.getElementById("board"), props);
+  board.enableMoveInput((event) => {
+    switch (event.type) {
+      case INPUT_EVENT_TYPE.moveStart:
+        return true;
+      case INPUT_EVENT_TYPE.moveDone:
+        return onDrop(event.squareFrom, event.squareTo);
+      case INPUT_EVENT_TYPE.moveCanceled:
+    }
+  }, COLOR.white);
   return {
     flip: () => {
-      board.flip();
+      let orientation =
+        board.getOrientation() == COLOR.white ? COLOR.black : COLOR.white;
+      board.setOrientation(orientation);
     },
     reset: () => {
       game.reset();
@@ -431,11 +463,11 @@ export function engineGame(options) {
       let i = 0;
       let h = game.history();
       game.reset();
-      board.position(game.fen());
+      board.setPosition(game.fen());
       const update = () => {
         if (i < h.length) {
           game.move(h[i]);
-          board.position(game.fen());
+          board.setPosition(game.fen());
         } else {
           clearInterval(r);
         }
@@ -444,4 +476,4 @@ export function engineGame(options) {
       const r = setInterval(update, duration);
     },
   };
-}
+};

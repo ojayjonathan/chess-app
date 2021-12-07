@@ -9,10 +9,40 @@ import { APP_ROUTES } from "./utils/constants";
 import Basics from "./components/practice/basics";
 import PracticeLessons from "./components/practice/practice";
 import BoardEditor from "./components/boardEditor";
+import "./assets/styles/cm-chessboard.css";
+import "./assets/styles/main.css";
+
+export const moveAnotation = { class: "anotateGood", slice: "anotation" };
 
 function App() {
   return (
     <Layout>
+      <svg height="0" width="0">
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="3"
+            markerHeight="3.5"
+            refX="0"
+            refY="1.75"
+            orient="auto"
+          >
+            <polygon
+              points="0 0, 3 1.75, 0 3.5"
+              fill="#e8353566 "
+              stroke="none"
+            />
+          </marker>
+        </defs>
+        <g id="anotation" transform="">
+          <circle cx="12" cy="12" r="12" />
+          <path
+            fill="#fff"
+            d="M9 21.035l-9-8.638 2.791-2.87 6.156 5.874 12.21-12.436 2.843 2.817z"
+          />{" "}
+        </g>
+      </svg>
+
       <Routes>
         {/* {let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: true });} */}

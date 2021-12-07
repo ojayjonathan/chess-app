@@ -22,6 +22,7 @@ class PuzzleParser {
     this.themes = tokens[7];
     this.gameUr = tokens[8];
     this.currentMove = 0;
+    
   }
   getCurrentMove() {
     let match = this.moves[this.currentMove].match(
