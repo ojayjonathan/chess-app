@@ -304,3 +304,10 @@ marker.markerCircleRed {
   stroke-width: 3px;
   opacity: 0.4;
 }
+
+.marker.marker-circle-green{
+  stroke: #4c946a;
+  stroke-width: 3px;
+  opacity: 0.5;
+
+}

@@ -13,6 +13,10 @@ import {
 } from "../../utils/chessboard/Chessboard";
 import pieceSet from "../../assets/images/chessboard-sprite-staunty.svg";
 
+
+
+
+
 function Puzzle() {
   const board = React.useRef();
   const [solve, setSolve] = React.useState("Your turn");
@@ -75,7 +79,7 @@ function Puzzle() {
     style: {
       cssClass: "default",
       showCoordinates: true, // show ranks and files
-      borderType: BORDER_TYPE.thin, // thin: thin border, frame: wide border with coordinates in it, none: no border
+      borderType: BORDER_TYPE.frame, // thin: thin border, frame: wide border with coordinates in it, none: no border
       aspectRatio: 1, // height/width. Set to `undefined`, if you want to define it only in the css.
       moveFromMarker: MARKER_TYPE.frame, // the marker used to mark the start square
       moveToMarker: MARKER_TYPE.frame, // the marker used to mark the square where the figure is moving to

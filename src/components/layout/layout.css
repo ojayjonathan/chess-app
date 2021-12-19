@@ -127,7 +127,7 @@ ul .header {
 }
 
 .two_column_layout__item {
-  max-width: calc(400px + 30px);
+  max-width: 500px;
   margin-left: 15px;
   flex: 1;
   width: 100%;

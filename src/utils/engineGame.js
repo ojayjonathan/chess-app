@@ -39,8 +39,8 @@ export const engineGame = (options) => {
   let board;
   // /home/ojay/dev/web/chess_app/public/static/stockfish.min.js
 
-  let engine = new Worker("/static/stockfish.min.js");
-  let evaler = new Worker("/static/stockfish.min.js");
+  let engine = new Worker("/stockfish.js");
+  let evaler = new Worker("/stockfish.js");
   let engineStatus = {};
   let displayScore = true;
   let time = { wtime: 300000, btime: 300000, winc: 2000, binc: 0 };
@@ -336,7 +336,7 @@ export const engineGame = (options) => {
     style: {
       cssClass: "default",
       showCoordinates: true, // show ranks and files
-      borderType: BORDER_TYPE.thin, // thin: thin border, frame: wide border with coordinates in it, none: no border
+      borderType: BORDER_TYPE.frame, // thin: thin border, frame: wide border with coordinates in it, none: no border
       aspectRatio: 1, // height/width. Set to `undefined`, if you want to define it only in the css.
       moveFromMarker: MARKER_TYPE.frame, // the marker used to mark the start square
       moveToMarker: MARKER_TYPE.frame, // the marker used to mark the square where the figure is moving to

@@ -43,7 +43,8 @@
   align-items: flex-end;
 }
 .fen button,
-.fen input,.mark select {
+.fen input,
+.mark select {
   background-color: #333;
   border: 1px solid rgba(162, 162, 162, 0.37);
   border-radius: 5px;
@@ -61,13 +62,51 @@
   background: var(--text-denger) !important;
   color: #fff !important;
 }
-.mark input{
+.mark input {
   border: 1px solid rgba(162, 162, 162, 0.37);
 }
-.mark_options>div{
+.mark_options > div {
   margin: 5px 10px;
-
 }
 .mark label {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
+}
+
+.preview {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.preview_card{
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+}
+.preview_card button {
+  background-color: #333;
+  margin: 10px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: var(--light-white);
+  font-weight: bold;
+}
+
+.preview_card__top {
+  padding: 5px 10px;
+  display: flex;
+  width: 100%;
+  align-self: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.2s ease;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 0 5px;
 }

@@ -63,7 +63,8 @@ function BoardEditor() {
     setEditMode(EDIT_MODE.move);
     return () => fenEditor.current.board.destroy();
   }, []);
-
+  const previewIMageRef = React.useRef();
+  const [isPreview, setPreview] = React.useState(false);
   return (
     <div className="practice two_column_layout editor">
       <div className="board__section two_column_layout__item">
@@ -182,7 +183,7 @@ function BoardEditor() {
             </button>
             <button
               className="delete_btn"
-              onClick={() => updateEditMove(EDIT_MODE.mark)}
+              onClick={() => fenEditor.current.removeMarkers()}
             >
               Clear Markers
             </button>
@@ -207,10 +208,10 @@ function BoardEditor() {
                   fenEditor.current.setMarker("", e.target.value);
                 }}
               >
-                <option value="arrow">&rarr; Arrow</option>
-                <option selected value="circle">
+                <option defaultValue value="circle">
                   &#x25EF; Circle
                 </option>
+                <option value="arrow">&rarr; Arrow</option>
                 <option value="dot">&#x2b24; Dot</option>
                 <option value="frame">&#x25A2; Frame</option>
               </select>
@@ -220,12 +221,60 @@ function BoardEditor() {
         <div className="d-flex fen">
           <div className="d_flex align_items_center w_100 ">
             <input className="w_100" value={currentFen} />
-            <button>Share</button>
+            <button
+              onClick={() => {
+                setPreview(true);
+              }}
+            >
+              Share
+            </button>
           </div>
         </div>
       </div>
+
+      {isPreview && (
+        <div className="preview">
+          <div className="preview_card b_dark">
+            <span className="preview_card__top">Preview</span>
+            <div className="preview_image" ref={previewIMageRef}>
+              <img src={(() => fenEditor.current.genUrl())()} />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default BoardEditor;
+
+const genPreviewImageUrl = (svgElement) => {
+  console.log(svgElement);
+  let xml = new XMLSerializer().serializeToString(svgElement);
+  const blob = new Blob([xml], { type: "image/svg+xml;charset=utf-8" });
+  const url = window.URL.createObjectURL(blob);
+  const image = new Image();
+  image.src = url;
+  // document.body.appendChild(image);
+  // return new Promise((resolve, reject) => {
+  //   image.onload = async () => {
+  //     ImageBlob = await ImageFromSvg(image, `chess game position.jpeg`);
+  //     resolve(ImageBlob);
+  //   };
+  // });
+  return url;
+};
+const ImageFromSvg = (image, fileName) => {
+  /*creates a new jpeg image from image object provided */
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  canvas.setAttribute("width", "200px");
+  canvas.setAttribute("height", "200px");
+  ctx.drawImage(image, 0, 0, 200, 200, 0, 0, 200, 200);
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      blob.name = fileName;
+      resolve(blob);
+    }, "image/jpeg");
+  });
+};
