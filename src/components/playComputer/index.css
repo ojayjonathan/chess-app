@@ -1,32 +1,31 @@
 .game {
   color: var(--light-white);
   user-select: none;
-
 }
 
 .game__user {
   color: var(--light-white);
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+  margin-left: 10px;
+  flex: 1;
 }
 
 .clk {
   padding: 5px 10px;
+ background: #333333;
+ 
 }
 
 .clk__active {
-  color: var(--success);
+  background-color: var(--active);
+  color: #fff;
 }
 
 .name {
   color: #bfbeba;
   text-transform: lowercase;
   font-weight: 500;
+  width: 100px;
 }
-
-
-
 
 .controls {
   padding-top: 10px;
@@ -39,15 +38,10 @@
 }
 
 .controls_bottom {
+  flex: 1;
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgba(186, 186, 186, 0.25);
-}
-
-@media (min-width: 620px) {
-  .controls_bottom {
-    height: 300px;
-  }
 }
 
 .controls_top {
@@ -80,7 +74,7 @@
 }
 
 .game-controls span:hover {
-opacity: .7;
+  opacity: 0.7;
 }
 
 .py-1 {
@@ -105,13 +99,12 @@ opacity: .7;
     background-color: var(--bg);
     margin-left: 0;
     width: 100%;
-    max-width: 430px;
+    /* max-width: 430px; */
     flex: 1;
     justify-content: start;
     padding-top: 0;
     margin-bottom: 2rem;
-
-}
+  }
   .game-controls {
     position: fixed;
     width: 100vw;
@@ -121,10 +114,8 @@ opacity: .7;
     z-index: 999;
   }
   .controls_bottom {
-
     transition: height 0.3s linear;
   }
-
 }
 
 /*  */
@@ -138,8 +129,8 @@ opacity: .7;
   width: calc(100% - 20px);
   visibility: hidden;
 }
-.tab_items .absolute{
-    top: 0;
+.tab_items .absolute {
+  top: 0;
 }
 .absolute {
   position: absolute;
@@ -165,9 +156,11 @@ opacity: .7;
 
 .game_info {
   font-size: 16px;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
-.game_info div {
+.game_info > div {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,19 +168,19 @@ opacity: .7;
 }
 
 .game_info .black {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
   background-color: #222;
   display: inline-block;
   margin: 0 1rem 0 0.2rem;
 }
 
 .game_info .white {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   margin: 0 1rem 0 0.2rem;
-  border-radius: 50%;
+  border-radius: 5px;
   background-color: #fff;
   display: inline-block;
 }

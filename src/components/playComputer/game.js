@@ -45,21 +45,11 @@ function Game() {
   return (
     <div className="game two_column_layout">
       <div className="two_column_layout__item">
-        <UserProfile
-          user={
-            gameState.orientation === "white" ? state.player1 : state.player2
-          }
-        />
         <div className="board__container">
           <div id="board"></div>
         </div>
-        <UserProfile
-          user={
-            gameState.orientation === "white" ? state.player2 : state.player1
-          }
-        />
       </div>
-      <div className="controls two_column_layout__item">
+      <div className="align_self_stretch controls two_column_layout__item">
         <div className="controls_top">
           <span id="eval"> </span> <div> {gameInfoTab.name} </div>
           <div className="tab_controls">
@@ -111,12 +101,15 @@ function Game() {
               id="engineStatus"
             >
               <div>
-                {state.player1.username} <span className="white"> </span> vs
-                &nbsp; &nbsp; {state.player2.username}
-                <span className="black"> </span>
-                <span id="result"> 1 - 0 </span>
+                <span className="white"> </span>
+                <UserProfile user={state.player1} />
               </div>
               <div>
+                <span className="black"> </span>
+                <UserProfile user={state.player2} />
+              </div>
+            
+              {/* <div>
                 <small className="my-0"> Replay the game </small>
               </div>
               <div className="text_center">
@@ -134,7 +127,7 @@ function Game() {
                     fast{" "}
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div
               className={`absolute ${gameInfoTab.id === 2 ? "tab_active" : ""}`}
